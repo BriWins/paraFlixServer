@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/BriWins/paraFlixServer#readme",
   "dependencies": {
+    "body-parser": "^1.20.1",
     "express": "^4.18.2"
   }
 }
