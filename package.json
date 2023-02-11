@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/BriWins/paraFlixServer/issues"
   },
-  "homepage": "https://github.com/BriWins/paraFlixServer#readme"
+  "homepage": "https://github.com/BriWins/paraFlixServer#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
