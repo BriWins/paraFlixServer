@@ -1,5 +1,9 @@
+const bodyParser = require("body-parser");
 const express = require("express");
 morgan = require("morgan");  //logging requests
+bodyParser = require("body-parser");
+uuid = require("uuid");
+
 const app = express();
 app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
