@@ -1,4 +1,3 @@
-const bodyParser = require("body-parser");
 const express = require("express");
 morgan = require("morgan");  //logging requests
 bodyParser = require("body-parser");
@@ -7,6 +6,7 @@ uuid = require("uuid");
 const app = express();
 app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
+app.use(bodyParser.json());
 
 
 let paraMovies = [
@@ -38,7 +38,19 @@ app.get("/documentation", (req, res) => {
 
 /* Routes user to movie list array */
 app.get("/movies", (req, res) => {
-    res.json(paraMovies);
+    res.status(200).json(paraMovies);
+});
+
+/* Allows user to search movie by title */
+app.get("/movies/:title", (req, res) => {
+    const { title } = req.params;
+    const movie = paraMovies.find( movie => movie.title === title );
+
+    if (movie) {
+        res.status(200).json(movie);
+    } else {
+        res.status(400).send("no such movie");
+    }
 });
 
 /* Error handling function */
