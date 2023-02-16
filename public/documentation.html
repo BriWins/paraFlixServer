@@ -10,5 +10,58 @@
 <body>
     <h1>ParaFlix Developer Instructions</h1>
     <p class="p-description"> ParaFlix is a web application that allows paranormal enthusiasts to access a variety of information about paranormal movies. Users can register an account, update their personal information, and create a list of their favorite movies. ParaFlix consists of a well-designed REST API and architected database built using JavaScript, Node.js, Express, and MongoDB. The REST API is accessed via commonly used HTTP methods like GET and POST. The CRUD method is used to retrieve data from the database and store that information in a non-relational way.</p>
+
+    <h2>Application Features</h2>
+
+    <ul>
+        <li>Returns a list of ALL movies to the user</li>
+        <li>Returns data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</li>
+        <li>Returns data about a genre (description) by name/title (e.g., “Thriller”)</li>
+        <li>Returns data about a director (bio, birth year, death year) by name</li>
+        <li>Allows new users to register</li>
+        <li>Allows user to update their user info (username)</li>
+        <li>Allows user to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)</li>
+        <li>Allows user to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)</li>
+        <li>Allows existing users to deregister (showing only a text that a user email has been removed—more on this later)</li>
+    </ul>
+
+    <table>
+        <thead>
+            <th>Business Logic</th>
+            <th> URL</th>
+            <th>HTTP Method</th>
+            <th>Query Parameters</th>
+            <th>Request Body Data Format</th>
+            <th>Response Body Data Format</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>User can register account</td>
+                <td> /users</td>
+                <td> POST </td>
+                <td> None</td>
+                <td> { <br>
+                        "Name": "Jane" <br>
+                        "Password": "Test", <br>
+                        "Email": "Test"<br>
+                    }
+                </td>
+                <td> Returns a json object</td>
+            </tr>
+            <tr>
+                <td>User can update personal info</td>
+                <td> /users/:id</td>
+                <td> PUT </td>
+                <td> user id</td>
+                <td> { <br>
+                        "Name": "Jane" <br>
+                        "Password": "Test", <br>
+                        "Email": "Test"<br>
+                    }
+                </td>
+                <td> Returns updated info in json format</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
