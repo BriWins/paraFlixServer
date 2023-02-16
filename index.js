@@ -151,7 +151,23 @@ let paraMovies = [
     },
 ];
 
-
+let user = [
+    {
+        id: 1,
+        name: "Brianna",
+        favoriteMovies: []
+    }, 
+    {
+        id: 2,
+        name: "Emily",
+        favoriteMovies: []
+    }, 
+    {
+        id: 3,
+        name: "Sally",
+        favoriteMovies: []
+    }
+]
 
 /* Routes user to homepage */
 app.get("/", (req, res) => {
