@@ -1,4 +1,12 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const Models = require("./models.js");
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
+mongoose.connect("mongodb://localhost:27017/paraFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
+
 morgan = require("morgan");  //logging requests
 bodyParser = require("body-parser");
 uuid = require("uuid");
@@ -7,6 +15,8 @@ const app = express();
 app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
 app.use(bodyParser.json());
+
+
 
 let paraMovies = [
     {
