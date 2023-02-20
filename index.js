@@ -1,11 +1,12 @@
 const express = require("express");
+bodyParser = require("body-parser");
+uuid = require("uuid");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+
 const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 const morgan = require("morgan");  //logging requests
-const uuid = require("uuid");
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
 
-mongoose.connect("mongodb://localhost:27017/paraFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/paraFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 /* Users can register account */
 app.post("/users", (req, res) => {
