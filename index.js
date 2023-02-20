@@ -11,6 +11,9 @@ const morgan = require("morgan");  //logging requests
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+let auth = require("./auth")(app);
+const passport = require("passport");
+require("./passport.js");
 app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
 
