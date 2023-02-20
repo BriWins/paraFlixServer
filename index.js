@@ -17,7 +17,7 @@ require("./passport.js");
 app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
 
-mongoose.connect('mongodb://127.0.0.1:27017/test');
+mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
 
 /* Users can register account */
 app.post("/users", (req, res) => {
@@ -85,10 +85,10 @@ app.post("/users/:Username/movies/:MovieID", passport.authenticate("jwt", { sess
 
 /* User can remove a movie from their list */
 app.delete("/users/:Username/movies/:MovieID", passport.authenticate("jwt", { session: false }), (req, res) => {
-    Users.findOneAndRemove({ Username: req.params.Username }, {
+    Users.findOneAndUpdate({ Username: req.params.Username }, { 
         $pull: { FavoriteMovies: req.params.MovieID }
-    }, 
-    { new: true},
+    },
+    {new: true},
     (err, updatedUser) => {
         if (err) {
             console.error(err);
@@ -96,9 +96,9 @@ app.delete("/users/:Username/movies/:MovieID", passport.authenticate("jwt", { se
         } else {
             res.json(updatedUser);
         }
-    });
-        
+    })
 });
+
 
 /* User can delete their account */
 app.delete("/users/:Username", passport.authenticate("jwt", { session: false }), (req, res) => {
@@ -131,7 +131,7 @@ app.get("/documentation", (req, res) => {
 app.get("/movies", passport.authenticate("jwt", { session: false }), (req, res) => {
    Movies.find()
     .then((movies) => {
-        res.status(200).json(movies);
+        res.status(201).json(movies);
     }).catch((err) => {
         console.error(err);
         res.status(500).send("Error: " + err);
