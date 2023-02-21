@@ -2,6 +2,7 @@ const express = require("express");
 bodyParser = require("body-parser");
 uuid = require("uuid");
 const mongoose = require("mongoose");
+const { check, validationResult } = require("express-validator");
 
 const Models = require("./models.js");
 const Movies = Models.Movie;
@@ -34,29 +35,41 @@ app.use(express.static('public')); //serves static file
 mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
 
 /* Users can register account */
-app.post("/users", (req, res) => {
+app.post("/users", [
+    check("Username", "Username is required").isLength({min: 5}),
+    check("Username", "Username contains non alphanumeric characters - not allowed.").isAlphanumeric(),
+    check("Password", "Password is required and must be at least eight characters ong.").isLength({min: 8}),
+    check("Email", "Email does not appear to be valid").isEmail()
+], (req, res) => {
+
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array()});
+    }
+
     let hashedPassword = Users.hashedPassword(req.body.Password);
-   Users.findOne({ Username: req.body.Username})
-    .then((user) => {
-        if (user) {
-            return res.status(400).send(req.body.Username + "already exists!");
-        } else {
-            Users.create({
-                Username: req.body.Username,
-                Password: hashedPassword,
-                Email: req.body.Email,
-                Birthdate: req.body.Birthdate,
-            }).then((user) => {
-                res.status(201).json(user)
-            }).catch((error) => {
-                console.log(error);
-                res.status(500).send("Error: " + error);
-            })
-        }
-    }).catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error );
-    });
+    Users.findOne({ Username: req.body.Username})
+        .then((user) => {
+            if (user) {
+                return res.status(400).send(req.body.Username + "already exists!");
+            } else {
+                Users.create({
+                    Username: req.body.Username,
+                    Password: hashedPassword,
+                    Email: req.body.Email,
+                    Birthdate: req.body.Birthdate,
+                }).then((user) => {
+                    res.status(201).json(user)
+                }).catch((error) => {
+                    console.log(error);
+                    res.status(500).send("Error: " + error);
+                })
+            }
+        }).catch((error) => {
+            console.error(error);
+            res.status(500).send("Error: " + error );
+        });
 });
 
 /* User can update their info */
