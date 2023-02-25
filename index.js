@@ -14,6 +14,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require("cors");
 
+let auth = require("./auth")(app);
+const passport = require("passport");
+require("./passport.js");
+app.use(morgan("common"));
+app.use(express.static('public')); //serves static file
+
+
+// mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
+mongoose.connect(process.env.CONNECTION_URI);
+
 let allowedOrigins = ["http://localhost:8080"];
 app.use(cors({
     origin: (origin, callback) => {
@@ -25,14 +35,6 @@ app.use(cors({
         return callback(true, null);
     }
 }));
-
-let auth = require("./auth")(app);
-const passport = require("passport");
-require("./passport.js");
-app.use(morgan("common"));
-app.use(express.static('public')); //serves static file
-
-mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
 
 /* Users can register account */
 app.post("/users", [
@@ -210,3 +212,7 @@ const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
     console.log("Listening on Port " + port);
 });
+
+
+
+
