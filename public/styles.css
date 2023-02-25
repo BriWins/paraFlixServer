@@ -1,20 +1,12 @@
 body {
-    background-color: rgb(75, 75, 67);
+    background-color: rgb(255, 255, 255);
+}
+
+.color {
+    background-color: lightgray;
 }
 
 h1 {
     text-align: center;
-    color: rgb(252, 0, 0);
 }
 
-.p-description {
-    color: white;
-}
-
-h2 {
-    color: white;
-}
-
-ul {
-   color: white;
-}
