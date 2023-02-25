@@ -21,14 +21,14 @@ app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
 
 
-// mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
-mongoose.connect(
-    process.env.CONNECTION_URI,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    },
-)
+mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
+// mongoose.connect(
+//     process.env.CONNECTION_URI,
+//     {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//     },
+// )
 
 let allowedOrigins = ["http://localhost:8080"];
 app.use(cors({
@@ -46,7 +46,7 @@ app.use(cors({
 app.post("/users", [
     check("Username", "Username is required").isLength({min: 5}),
     check("Username", "Username contains non alphanumeric characters - not allowed.").isAlphanumeric(),
-    check("Password", "Password is required and must be at least eight characters ong.").isLength({min: 8}),
+    check("Password", "Password is required and must be at least eight characters long.").isLength({min: 8}),
     check("Email", "Email does not appear to be valid").isEmail()
 ], (req, res) => {
 
