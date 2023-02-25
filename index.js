@@ -21,7 +21,7 @@ app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
 
 
-// mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
+// mongoose.connect('mongodb://127.0.0.1:27017/paraflixdb');
 mongoose.connect(
     process.env.CONNECTION_URI,
     {
