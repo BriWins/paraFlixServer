@@ -25,7 +25,7 @@
         <li>Allows existing users to deregister (showing only a text that a user email has been removed—more on this later)</li>
     </ul>
 
-    <table>
+    <!-- <table>
         <thead>
             <th>Business Logic</th>
             <th> URL</th>
@@ -62,6 +62,125 @@
                 <td> Returns updated info in json format</td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
+    <table class="table">
+        <thead>
+          <tr>
+              <th>Business Logic</th>
+              <th>URL</th>
+              <th>HTTP Method</th>
+              <th>Query Parameters</th>
+              <th>Request Body Data Format</th>
+              <th>Response Body Data Format</th>
+          </tr>
+        </thead>
+  
+       <tbody>   
+        <tr>
+            <td>Returns a list of all movies</td>
+            <td>/movies</td>
+            <td>GET</td>
+            <td>-</td>
+            <td>-</td>
+            <td>A JSON object holding data about all the movies</td>
+        </tr>
+  
+        <tr>
+          <td>Returns data about single movie by title</td>
+          <td>/movies/:title</td>
+          <td>GET</td>
+          <td>:title</td>
+          <td>-</td>
+          <td>A JSON object holding data about a single movie, consisting of; Title, Director, Genre, release date</td>
+        </tr>
+  
+        <tr>
+          <td>Returns data about a genre by title</td>
+          <td>/movies/genre/:genreName</td>
+          <td>GET</td>
+          <td>:genreName</td>
+          <td>-</td>
+          <td>A JSON object holding data about a specific genre of movie</td>
+        </tr>
+  
+        <tr>
+          <td>Returns data about a director by name</td>
+          <td>/movies/directors/:directorName</td>
+          <td>GET</td>
+          <td>:directorName</td>
+          <td>-</td>
+          <td>A JSON object holding data about a specific director</td>
+        </tr>
+  
+        <tr>
+          <td>Allows new users to register</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>-</td>
+          <td>A JSON object holding data about the user to add, structured like: {
+            ID: Integer,<br>
+            Username: String,
+            Password: String,
+            Email: String,
+            Birthday: Date
+          } Must contain; Username, Email and Password</td>
+          <td>A JSON object holding data about the user that was added, including a new ID. </td>
+        </tr>
+  
+        <tr>
+          <td>Return Information about User by Username</td>
+          <td>/users/:Username</td>
+          <td>GET</td>
+          <td>:Username</td>
+          <td>-</td>
+          <td>A JSON object holding data about the user. </td>
+        </tr>
+  
+        <tr>
+          <td>Allows users to update their user info</td>
+          <td>/users/:Username</td>
+          <td>PUT</td>
+          <td>:Username</td>
+          <td>A JSON object holding data that the User would like to update. Formatted as {
+            Username: String,
+            (required)
+            Password: String,
+            (required)
+            Email: String,
+            (required)
+            Birthday: Date
+          }
+          </td>
+          <td>A JSON object holding data about the updated user information</td>
+        </tr>
+  
+        <tr>
+          <td>Allows users to add a movie to their favourites</td>
+          <td>/users/:Username/movies/:MovieID</td>
+          <td>POST</td>
+          <td>:Username, :MovieID</td>
+          <td>Movie is added via ID in request</td>
+          <td>Returns User information plus newly added favourite movie</td>
+        </tr>
+  
+        <tr>
+          <td>Allows users to remove a movie from their favourites</td>
+          <td>/users/:Username/movies/:MovieID</td>
+          <td>DELETE</td>
+          <td>:Username, :MovieID</td>
+          <td>-</td>
+          <td>Returns User information sans removed favourite movie</td>
+        </tr>
+  
+        <tr>
+          <td>Allows existing users to deregister</td>
+          <td>/users/:Username</td>
+          <td>DELETE</td>
+          <td>:Username</td>
+          <td>-</td>
+          <td>A text message indicating that user was deregistered</td>
+        </tr>
+       </tbody>
+       </table>
 </body>
 </html>

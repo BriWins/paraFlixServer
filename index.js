@@ -37,7 +37,7 @@ app.use(cors({
 
 /* Users can register account */
 app.post("/users", [
-    check("Username", "Username is required and must be at lease 5 characters long.").isLength({min: 5}),
+    check("Username", "Username is required and must be at least 5 characters long.").isLength({min: 5}),
     check("Username", "Username contains non alphanumeric characters - not allowed.").isAlphanumeric(),
     check("Password", "Password is required and must be at least eight characters long.").isLength({min: 8}),
     check("Email", "Email does not appear to be valid").isEmail()
