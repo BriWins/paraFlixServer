@@ -22,7 +22,7 @@ app.use(express.static('public')); //serves static file
 
 
 // mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
-mongoose.connect(process.env.CONNECTION_URI);
+mongoose.createConnection(process.env.CONNECTION_URI);
 
 let allowedOrigins = ["http://localhost:8080"];
 app.use(cors({
