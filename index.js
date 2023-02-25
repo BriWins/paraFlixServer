@@ -21,14 +21,14 @@ app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
-// mongoose.connect(
-//     process.env.CONNECTION_URI,
-//     {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true,
-//     },
-// )
+// mongoose.connect('mongodb://127.0.0.1:27017/paraFlixDB');
+mongoose.connect(
+    process.env.CONNECTION_URI,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    },
+)
 
 let allowedOrigins = ["http://localhost:8080"];
 app.use(cors({
