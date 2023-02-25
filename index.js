@@ -20,9 +20,8 @@ require("./passport.js");
 app.use(morgan("common"));
 app.use(express.static('public')); //serves static file
 
-
-// mongoose.connect('mongodb://127.0.0.1:27017/paraflixdb');
-mongoose.connect(process.env.CONNECTION_URI)
+// mongoose.connect('mongodb://127.0.0.1:27017/');
+mongoose.connect(process.env.CONNECTION_URI);
 
 let allowedOrigins = ["http://localhost:8080"];
 app.use(cors({
@@ -108,7 +107,7 @@ app.post("/users/:Username/movies/:MovieID", passport.authenticate("jwt", { sess
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
-            res.json(updatedUser).send("This movie was added to your list!");
+            res.json(updatedUser);
         }
     })
 });
@@ -124,7 +123,7 @@ app.delete("/users/:Username/movies/:MovieID", passport.authenticate("jwt", { se
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
-            res.json(updatedUser).send("This movie was deleted from your list!");
+            res.json(updatedUser);
         }
     })
 });
@@ -212,7 +211,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
     console.log("Listening on Port " + port);
 });
-
-
-
-
