@@ -23,7 +23,7 @@ app.use(express.static('public')); //serves static file
 // mongoose.connect('mongodb://127.0.0.1:27017/');
 mongoose.connect(process.env.CONNECTION_URI);
 
-let allowedOrigins = ["http://localhost:8080"];
+let allowedOrigins = ["http://localhost:8080", "http://localhost:1234"];
 app.use(cors({
     origin: (origin, callback) => {
         if (!origin) return callback(null, true);
