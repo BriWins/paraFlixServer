@@ -12,7 +12,7 @@ const morgan = require("morgan");  //logging requests
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const cors = require("cors");
+// const cors = require("cors");
 
 let auth = require("./auth")(app);
 const passport = require("passport");
@@ -23,17 +23,17 @@ app.use(express.static('public')); //serves static file
 // mongoose.connect('mongodb://127.0.0.1:27017/');
 mongoose.connect(process.env.CONNECTION_URI);
 
-let allowedOrigins = ["http://localhost:8080", "http://localhost:1234"];
-app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin) return callback(null, true);
-        if(allowedOrigins.indexOf(origin) === -1) {
-            let message = "The CORS policy for this application doesn't allow access from origin " + origin;
-            return callback( new Error(message), false);
-        }
-        return callback(true, null);
-    }
-}));
+// let allowedOrigins = ["http://localhost:8080", "http://localhost:1234"];
+// app.use(cors({
+//     origin: (origin, callback) => {
+//         if (!origin) return callback(null, true);
+//         if(allowedOrigins.indexOf(origin) === -1) {
+//             let message = "The CORS policy for this application doesn't allow access from origin " + origin;
+//             return callback( new Error(message), false);
+//         }
+//         return callback(true, null);
+//     }
+// }));
 
 /* Users can register account */
 app.post("/users", [
